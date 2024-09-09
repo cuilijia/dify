@@ -97,6 +97,7 @@ export class DifyClient {
     const headers = {
       ...{
         Authorization: `Bearer ${this.apiKey}`,
+        "Ctoken": `Bearer ${window.localStorage.getItem('Ctoken')}`,
         "Content-Type": "application/json",
       },
       ...headerParams
