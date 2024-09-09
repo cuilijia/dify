@@ -295,6 +295,7 @@ const baseFetch = <T>(
     const accessToken = localStorage.getItem('console_token') || ''
     options.headers.set('Authorization', `Bearer ${accessToken}`)
   }
+  options.headers.set('Ctoken', `Bearer ${localStorage.getItem('Ctoken')}`)
 
   if (deleteContentType) {
     options.headers.delete('Content-Type')
@@ -441,7 +442,6 @@ export const upload = (options: any, isPublicAPI?: boolean, url?: string, search
     url: (url ? `${urlPrefix}${url}` : `${urlPrefix}/files/upload`) + (searchParams || ''),
     headers: {
       Authorization: `Bearer ${token}`,
-      Ctoken: `Bearer ${localStorage.getItem('Ctoken')}`,
     },
     data: {},
   }
