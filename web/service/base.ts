@@ -441,6 +441,7 @@ export const upload = (options: any, isPublicAPI?: boolean, url?: string, search
     url: (url ? `${urlPrefix}${url}` : `${urlPrefix}/files/upload`) + (searchParams || ''),
     headers: {
       Authorization: `Bearer ${token}`,
+      Ctoken: `Bearer ${localStorage.getItem('Ctoken')}`,
     },
     data: {},
   }
