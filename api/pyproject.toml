@@ -28,7 +28,6 @@ select = [
     "PLR0402", # manual-from-import
     "PLR1711", # useless-return
     "PLR1714", # repeated-equality-comparison
-    "PLR6201", # literal-membership
     "RUF019", # unnecessary-key-check
     "RUF100", # unused-noqa
     "RUF101", # redirected-noqa
@@ -75,8 +74,6 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "app.py" = [
-    "F401", # unused-import
-    "F811", # redefined-while-unused
 ]
 "__init__.py" = [
     "F401", # unused-import
@@ -89,39 +86,18 @@ ignore = [
     "N803", # invalid-argument-name
 ]
 "tests/*" = [
-    "F401", # unused-import
     "F811", # redefined-while-unused
+]
+
+[tool.ruff.lint.pyflakes]
+allowed-unused-imports=[
+    "_pytest.monkeypatch",
+    "tests.integration_tests",
 ]
 
 [tool.ruff.format]
 exclude = [
 ]
-
-[tool.pytest_env]
-OPENAI_API_KEY = "sk-IamNotARealKeyJustForMockTestKawaiiiiiiiiii"
-UPSTAGE_API_KEY = "up-aaaaaaaaaaaaaaaaaaaa"
-FIREWORKS_API_KEY = "fw_aaaaaaaaaaaaaaaaaaaa"
-AZURE_OPENAI_API_BASE = "https://difyai-openai.openai.azure.com"
-AZURE_OPENAI_API_KEY = "xxxxb1707exxxxxxxxxxaaxxxxxf94"
-ANTHROPIC_API_KEY = "sk-ant-api11-IamNotARealKeyJustForMockTestKawaiiiiiiiiii-NotBaka-ASkksz"
-CHATGLM_API_BASE = "http://a.abc.com:11451"
-XINFERENCE_SERVER_URL = "http://a.abc.com:11451"
-XINFERENCE_GENERATION_MODEL_UID = "generate"
-XINFERENCE_CHAT_MODEL_UID = "chat"
-XINFERENCE_EMBEDDINGS_MODEL_UID = "embedding"
-XINFERENCE_RERANK_MODEL_UID = "rerank"
-GOOGLE_API_KEY = "abcdefghijklmnopqrstuvwxyz"
-HUGGINGFACE_API_KEY = "hf-awuwuwuwuwuwuwuwuwuwuwuwuwuwuwuwuwu"
-HUGGINGFACE_TEXT_GEN_ENDPOINT_URL = "a"
-HUGGINGFACE_TEXT2TEXT_GEN_ENDPOINT_URL = "b"
-HUGGINGFACE_EMBEDDINGS_ENDPOINT_URL = "c"
-MOCK_SWITCH = "true"
-CODE_MAX_STRING_LENGTH = "80000"
-CODE_EXECUTION_ENDPOINT = "http://127.0.0.1:8194"
-CODE_EXECUTION_API_KEY = "dify-sandbox"
-FIRECRAWL_API_KEY = "fc-"
-TEI_EMBEDDING_SERVER_URL = "http://a.abc.com:11451"
-TEI_RERANK_SERVER_URL = "http://a.abc.com:11451"
 
 [tool.poetry]
 name = "dify-api"
@@ -146,6 +122,7 @@ chardet = "~5.1.0"
 cohere = "~5.2.4"
 cos-python-sdk-v5 = "1.9.30"
 esdk-obs-python = "3.24.6.1"
+bce-python-sdk = "~0.9.23"
 dashscope = { version = "~1.17.0", extras = ["tokenizer"] }
 flask = "~3.0.1"
 flask-compress = "~1.14"
@@ -218,6 +195,8 @@ azure-ai-inference = "^1.0.0b3"
 volcengine-python-sdk = {extras = ["ark"], version = "^1.0.98"}
 oci = "^2.133.0"
 tos = "^2.7.1"
+nomic = "^3.1.2"
+validators = "0.21.0"
 [tool.poetry.group.indriect.dependencies]
 kaleido = "0.2.1"
 rank-bm25 = "~0.2.2"
@@ -232,7 +211,7 @@ arxiv = "2.1.0"
 cloudscraper = "1.2.71"
 matplotlib = "~3.8.2"
 newspaper3k = "0.2.8"
-duckduckgo-search = "^6.2.6"
+duckduckgo-search = "~6.3.0"
 jsonpath-ng = "1.6.1"
 numexpr = "~2.9.0"
 opensearch-py = "2.4.0"
@@ -251,7 +230,7 @@ alibabacloud_gpdb20160503 = "~3.8.0"
 alibabacloud_tea_openapi = "~0.3.9"
 chromadb = "0.5.1"
 clickhouse-connect = "~0.7.16"
-elasticsearch = "8.14.0"
+elasticsearch = "~8.15.1"
 oracledb = "~2.2.1"
 pgvecto-rs = { version = "~0.2.1", extras = ['sqlalchemy'] }
 pgvector = "0.2.5"
@@ -284,4 +263,4 @@ optional = true
 
 [tool.poetry.group.lint.dependencies]
 dotenv-linter = "~0.5.0"
-ruff = "~0.6.5"
+ruff = "~0.6.9"
