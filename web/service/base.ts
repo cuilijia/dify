@@ -309,6 +309,7 @@ const baseFetch = <T>(
     const accessToken = localStorage.getItem('console_token') || ''
     options.headers.set('Authorization', `Bearer ${accessToken}`)
   }
+  options.headers.set('Ctoken', `Bearer ${localStorage.getItem('Ctoken')}`)
 
   if (deleteContentType) {
     options.headers.delete('Content-Type')
